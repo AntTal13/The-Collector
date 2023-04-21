@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Infinity Stones</h1>
+
+{% for stone in stones %}
+  <div class="card">
+    <a href="{% url 'detail' stone.id %}">
+        <div class="card-content">
+        <span class="card-title">{{ stone.name }}</span>
+        <p>Color: {{ stone.color }}</p>
+        <p>Description: {{ stone.description | linebreaks }}</p>
+        </div>
+    </a>
+  </div>
+{% endfor %}
+
+{% endblock %}
