@@ -9,4 +9,5 @@ urlpatterns = [
   path('stones/create/', views.StoneCreate.as_view(), name='stones_create'),
   path('stones/<int:pk>/update/', views.StoneUpdate.as_view(), name='stones_update'),
   path('stones/<int:pk>/delete/', views.StoneDelete.as_view(), name='stones_delete'),
+  path('stones/<int:stone_id>/add_use/', views.add_use, name='add_use'),
 ]

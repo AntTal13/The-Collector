@@ -3,16 +3,54 @@
 
 <h1>Infinity Stones</h1>
 
-  <div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ stone.name }}</span>
-        <p>Color: {{ stone.color }}</p>
-        <p>Description: {{ stone.description | linebreaks }}</p>
+  <div class="row">
+    <div class="col s6">
+      <div class="card">
+        <div class="card-content">
+            <span class="card-title">{{ stone.name }}</span>
+            <p>Color: {{ stone.color }}</p>
+            <p>Description: {{ stone.description | linebreaks }}</p>
+        </div>
+        <div class="card-action">
+            <a href="{% url 'stones_update' stone.id %}">Edit</a>
+            <a href="{% url 'stones_delete' stone.id %}">Delete</a>
+        </div>
     </div>
-    <div class="card-action">
-        <a href="{% url 'stones_update' stone.id %}">Edit</a>
-        <a href="{% url 'stones_delete' stone.id %}">Delete</a>
-      </div>
   </div>
+
+  <div class="col s6">
+    <form action="{% url 'add_use' stone.id %}" method="POST">
+      {% csrf_token %}
+      {{ use_form.as_p }}
+      <input type="submit" class="btn" value="Add Reason">
+    </form>
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Used</th></tr>
+      </thead>
+      <tbody>
+        {% for use in stone.use_set.all %}
+          <tr>
+            <td>{{use.date}}</td>
+            <td>{{use.get_reason_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  const dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
+
+  const selectEl = document.getElementById('id_reason');
+  M.FormSelect.init(selectEl);
+</script>
 
 {% endblock %}
