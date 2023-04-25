@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The Collector</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/stylesheet.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </head>
 <body>
@@ -19,6 +19,8 @@
         </ul>
         <ul class="right">
           <li><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'villains_create' %}">Add a Villain</a></li>
+          <li><a href="{% url 'villains_index' %}">View All Villains</a></li>
           <li><a href="{% url 'stones_create' %}">Add Infinity Stone</a></li>
           <li><a href="{% url 'index' %}">View Infinity Stones</a></li>
         </ul>

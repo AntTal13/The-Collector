@@ -40,6 +40,54 @@
   </div>
 </div>
 
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3>Other Villains who have possessed the {{ stone.name }}</h3>
+    {% if stone.villains.count %}
+      {% for villain in stone.villains.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ villain.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_villain' stone.id villain.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Remove</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>None</h5>
+    {% endif %}
+  </div>
+  <div class="col s6">
+    <h3>Have these Villains used the {{ stone.name }}?</h3>
+    {% if villains.count %}
+      {% for villain in villains.all %}
+        <div class="card">
+          <div class="card-content">
+            <span class="card-title">
+              {{ villain.name }}
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'assoc_villain' stone.id villain.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn">Add</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5>The {{stone.name}} Has Been Used By All Available Villains</h5>
+    {% endif %}
+  </div>
+</div>
+
 <script>
   const dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
